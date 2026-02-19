@@ -8,10 +8,10 @@ import java.math.BigDecimal;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // gerar ID automaticamente
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Gerar ID automaticamente
     private Long id;
 
-    @Column(nullable = false) // precisa ter
+    @Column(nullable = false) //Precisa ter
     private String name;
 
     @Column(nullable = false)
@@ -23,7 +23,7 @@ public class Product {
     @Column(nullable = false)
     private Boolean active = true;
 
-    private String description; // opcional
+    private String description; //Opcional
 
     public Product(String name, BigDecimal price, Integer quantity, String description) {
         this.name = name;
@@ -32,7 +32,7 @@ public class Product {
         this.description = description;
         this.active = true;
     }
-    //Classe vazia obrigatoria
+    //Classe obrigatoria
     public Product() {
     }
 }
