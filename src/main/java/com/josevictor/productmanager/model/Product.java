@@ -32,8 +32,9 @@ public class Product {
         this.description = description;
         this.active = true;
     }
-    //Classe obrigatoria
-    public Product() {
+
+    public Product(){
+        //Classe vazia
     }
 }
 
