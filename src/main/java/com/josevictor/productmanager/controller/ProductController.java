@@ -42,4 +42,24 @@ public class ProductController {
         Product product = productOptional.get();
         return ResponseEntity.ok(product);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product updateProduct){
+        Optional<Product> productOptional = productService.findById(id);
+
+        if (productOptional.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+        Product product = productOptional.get();
+
+        product.setName(updateProduct.getName());
+        product.setPrice(updateProduct.getPrice());
+        product.setQuantity(updateProduct.getQuantity());
+        product.setDescription(updateProduct.getDescription());
+
+        Product savedProduct = productService.create(product);
+
+        return ResponseEntity.ok(savedProduct);
+    }
 }
