@@ -15,4 +15,10 @@ Funcionalidades:
 - Listar produtos ativos
 - Atualizar informaçoes(exceto id) de um produto
 - Buscar produtos pelo id
-- Remover produto usando id para desativalo
+- Remover produto usando id para desativa-lo
+
+Como executar:
+1. Clone repositorio
+2. Execute o codigo usando Maven
+3. Abra o localHost no navegador
+4. Use um programa como Postman ou pelo Powershell para adicionar, editar e deletar produtos
