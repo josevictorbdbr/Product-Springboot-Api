@@ -5,6 +5,8 @@ import com.josevictor.productmanager.service.ProductService;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +30,15 @@ public class ProductController {
     //Listar
     @GetMapping
     public ResponseEntity<List<Product>> findAll() {
-        return ResponseEntity.ok(productService.findAll());
+        List<Product> allProducts = productService.findAll();
+        List<Product> activeProducts = new ArrayList<>();
+
+        for (Product product : allProducts) {
+            if(Boolean.TRUE.equals(product.getActive())){
+                activeProducts.add(product);
+            }
+        }
+        return ResponseEntity.ok(activeProducts);
     }
 
     @GetMapping("/{id}")
@@ -43,6 +53,7 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
+    //Editar
     @PutMapping("/{id}")
     public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product updateProduct){
         Optional<Product> productOptional = productService.findById(id);
@@ -61,5 +72,21 @@ public class ProductController {
         Product savedProduct = productService.create(product);
 
         return ResponseEntity.ok(savedProduct);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable long id){
+        Optional<Product> productOptional = productService.findById(id);
+
+        if(productOptional.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+        Product product = productOptional.get();
+        product.setActive(false);
+
+        productService.create(product);
+
+        return ResponseEntity.ok().build();
     }
 }
